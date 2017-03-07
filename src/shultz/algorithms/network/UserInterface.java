@@ -6,7 +6,6 @@ import algo.data.structures.GraphNode;
 import algo.data.structures.SingleLinkedList;
 
 public class UserInterface {
-	private int mazeCount = 0;
 	private Scanner scan = new Scanner(System.in);
 
 	public String getFile() {

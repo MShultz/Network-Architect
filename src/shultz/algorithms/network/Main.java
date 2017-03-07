@@ -1,6 +1,5 @@
 package shultz.algorithms.network;
 
-import java.util.ArrayList;
 
 
 public class Main {
@@ -9,9 +8,8 @@ public class Main {
 		UserInterface ui = new UserInterface();
 		String file = ui.getFile();
 		FileHandler handle = new FileHandler(file);
-		for(ArrayList<String> maze: handle.getAllMazes()){
-				
-			}
+		NetworkHandler network = new NetworkHandler(handle.getAllMazes());
+		network.handleMazes();
 
 	}
 
