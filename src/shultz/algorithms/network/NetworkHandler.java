@@ -15,7 +15,9 @@ public class NetworkHandler {
 
 	public void handleMazes() {
 		int totalLength;
+		int numMaze = 1;
 		for (ArrayList<String> maze : allMazes) {
+			System.out.println("Current Network: " + numMaze);
 			totalLength = 0;
 			MinimumSpanningTree MST = new MinimumSpanningTree(maze);
 			int count = 1;
@@ -25,9 +27,13 @@ public class NetworkHandler {
 				System.out.println("MST " + count);
 				printSockets(spanningTree);
 				System.out.println("Cable Needed: " + currentGraph.getTotalLength() + " units");
+				WeightedGraph<String> currentMST = initializeMST(currentGraph);
+				currentMST.findHub();
+				System.out.println("Optimal Hub Placement: " + currentMST.getBestHub().getValue() + "\n");
 				++count;
 			}
-			System.out.println("Total Length of Cable Needed: " + totalLength + " units");
+			System.out.println("Total Length of Cable Needed: " + totalLength + " units.\n");
+			numMaze++;
 		}
 	}
 
@@ -97,4 +103,11 @@ public class NetworkHandler {
 		}
 		return nodeFound;
 	}
+	
+	private WeightedGraph<String> initializeMST(WeightedGraph<String> originalGraph){
+		ArrayList<WeightedNode<String>> allNodes = originalGraph.getAllNodesInForest();
+		originalGraph.setConnections(allNodes, originalGraph.getForest());
+		return new WeightedGraph<String>(allNodes);
+	}
+	
 }
